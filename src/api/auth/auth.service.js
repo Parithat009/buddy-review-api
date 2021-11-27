@@ -11,7 +11,8 @@ const methods = {
         { expiresIn: '6000s' }
       )
     } else {
-      return { message: 'not have username' }
+      // return { message: 'not have username' }
+      throw Error('Error not have username')
     }
   },
 

@@ -1,4 +1,5 @@
-const { mockRestaurant } = require('../../mockData')
+const { v4: uuidv4 } = require('uuid')
+let { mockRestaurant } = require('../../mockData')
 
 const methods = {
   findAllService() {
@@ -15,13 +16,35 @@ const methods = {
     } catch (error) {
       throw new Error(error)
     }
+  },
 
+  reserveService(id, body) {
+    try {
+      let element = {}
+      const isRestauraunt = mockRestaurant.map(item => {
+        if (item.id !== id) return item
+        else {
+          return element = {
+            ...item,
+            slot: [
+              ...item.slot,
+              {
+                slotId: uuidv4(),
+                customerName: body.customerName,
+                date: body.date,
+                time: body.time
+              }
+            ]
+          }
+        }
+      })
+
+      mockRestaurant = isRestauraunt
+      return element
+    } catch (error) {
+      throw new Error(error)
+    }
   }
-
-  // signUpService(params) {
-  //   userSystem.push(params)
-  //   return { message: 'Sign Up Success' }
-  // }
 }
 
 module.exports = { ...methods }

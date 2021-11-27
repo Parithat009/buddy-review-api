@@ -1,24 +1,32 @@
-const { findAllService, findOneService } = require('./restauraunt.service')
+const { findAllService, findOneService, reserveService } = require('./restauraunt.service')
 
 const methods = {
   async findAll(req, res) {
-    const response = await findAllService()
-    return res.status(200).send(response)
+    try {
+      const response = await findAllService()
+      return res.send(response)
+    } catch (error) {
+      return res.status(400).json({ status: 400, message: error.message });
+    }
   },
 
   async findOne(req, res) {
-    const response = await findOneService(req.params.id)
-    res.status(200).send(response)
+    try {
+      const response = await findOneService(req.params.id)
+      res.status(200).send(response)
+    } catch (error) {
+      return res.status(400).json({ status: 400, message: error.message })
+    }
   },
 
-  // async reserve(req, res) {
-  //   try {
-  //     const response = await signUpService(req.body)
-  //     res.status(201).send(response)
-  //   } catch (error) {
-  //     throw new Error(error)
-  //   }
-  // }
+  async reserve(req, res) {
+    try {
+      const response = await reserveService(req.params.id, req.body)
+      res.send(response)
+    } catch (error) {
+      return res.status(400).json({ status: 400, message: error.message })
+    }
+  }
 }
 
 module.exports = { ...methods }

@@ -6,7 +6,7 @@ const methods = {
       const response = await signInService(req.body)
       return res.send({ token: response })
     } catch (error) {
-      throw new Error(error)
+      return res.status(400).json({ status: 400, message: error.message });
     }
   },
 
@@ -15,7 +15,7 @@ const methods = {
       const response = await signUpService(req.body)
       res.status(201).send(response)
     } catch (error) {
-      throw new Error(error)
+      return res.status(400).json({ status: 400, message: e.message });
     }
   }
 }
