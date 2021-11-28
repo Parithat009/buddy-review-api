@@ -32,7 +32,8 @@ const methods = {
                 slotId: uuidv4(),
                 customerName: body.customerName,
                 date: body.date,
-                time: body.time
+                timeStart: body.timeStart,
+                timeEnd: body.timeEnd
               }
             ]
           }

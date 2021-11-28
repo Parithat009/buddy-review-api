@@ -4,7 +4,8 @@ const reserveSchema = () => {
   return [
     body('customerName').isString().withMessage('Invalid customer name'),
     body('date').isString().withMessage('Invalid date'),
-    body('time').isString().withMessage('Invalid time'),
+    body('timeStart').isString().withMessage('Invalid time'),
+    body('timeEnd').isString().withMessage('Invalid time'),
   ]
 }
 
